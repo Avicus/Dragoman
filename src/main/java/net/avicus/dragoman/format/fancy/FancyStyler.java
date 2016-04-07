@@ -1,6 +1,6 @@
 package net.avicus.dragoman.format.fancy;
 
-import net.avicus.dragoman.TranslationBundle;
+import net.avicus.dragoman.Localizable;
 import net.avicus.dragoman.format.Styler;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -12,15 +12,13 @@ import java.util.List;
 import java.util.Locale;
 
 public class FancyStyler extends FancyMessage implements Styler<FancyMessage>, FancyAttributable {
-    private final TranslationBundle bundle;
-    private final String key;
+    private final Localizable text;
     private final List<FancyMessage> arguments;
     private final FancyAttributes attributes;
     private final List<FancyMessage> extras;
 
-    public FancyStyler(TranslationBundle bundle, String key, List<FancyMessage> arguments) {
-        this.bundle = bundle;
-        this.key = key;
+    public FancyStyler(Localizable text, List<FancyMessage> arguments) {
+        this.text = text;
         this.arguments = arguments;
         this.attributes = new FancyAttributes();
         this.extras = new ArrayList<>();
@@ -32,7 +30,7 @@ public class FancyStyler extends FancyMessage implements Styler<FancyMessage>, F
     }
 
     public TextComponent toComponent(Locale locale) {
-        String raw = this.bundle.translate(locale, this.key);
+        String raw = this.text.translate(locale);
 
         List<TextComponent> parts = new ArrayList<>();
 

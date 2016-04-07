@@ -1,4 +1,4 @@
-package net.avicus.dragoman.format.simple;
+package net.avicus.dragoman.format;
 
 import net.avicus.dragoman.Localizable;
 import net.avicus.dragoman.TranslationBundle;

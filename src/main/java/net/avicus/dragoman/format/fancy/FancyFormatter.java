@@ -2,7 +2,7 @@ package net.avicus.dragoman.format.fancy;
 
 import net.avicus.dragoman.TranslationBundle;
 import net.avicus.dragoman.format.Formatter;
-import net.md_5.bungee.api.chat.TextComponent;
+import net.avicus.dragoman.format.LocalizedString;
 import org.bukkit.ChatColor;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class FancyFormatter implements Formatter<FancyMessage> {
 
     @Override
     public FancyStyler format(List<FancyMessage> arguments) {
-        return new FancyStyler(this.bundle, this.key, arguments);
+        return new FancyStyler(new LocalizedString(this.bundle, this.key), arguments);
     }
 
     public FancyStyler format(String arg1, String... arguments) {
