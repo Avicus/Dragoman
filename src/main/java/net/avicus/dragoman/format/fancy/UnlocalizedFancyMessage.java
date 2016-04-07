@@ -15,6 +15,11 @@ public class UnlocalizedFancyMessage extends FancyMessage {
         this.text = text;
     }
 
+    public UnlocalizedFancyMessage(String text, ChatColor color) {
+        this(text);
+        color(color);
+    }
+
     @Override
     public TextComponent translate(@Nullable Locale locale) {
         return super.build(this.text);
