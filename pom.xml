@@ -6,7 +6,7 @@
 
     <groupId>net.avicus</groupId>
     <artifactId>dragoman</artifactId>
-    <version>1.1.1</version>
+    <version>1.1.7</version>
 
     <distributionManagement>
         <repository>

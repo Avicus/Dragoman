@@ -5,7 +5,7 @@ import net.avicus.dragoman.Localizable;
 import javax.annotation.Nullable;
 import java.util.Locale;
 
-public class UnlocalizedString implements Localizable<String> {
+public class UnlocalizedString implements Localizable {
     private final String text;
 
     public UnlocalizedString(String text) {

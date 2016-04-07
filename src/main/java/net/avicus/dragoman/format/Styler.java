@@ -4,8 +4,8 @@ import net.avicus.dragoman.Localizable;
 
 import java.util.Locale;
 
-public interface Styler<P, T> extends Localizable<T> {
+public interface Styler<P> extends Localizable {
     P getArgument(int num);
 
-    T translate(Locale locale);
+    String translate(Locale locale);
 }

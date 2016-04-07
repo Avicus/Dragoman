@@ -6,23 +6,34 @@ import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class LocalizedFancyMessage extends FancyMessage {
-    private final Localizable<String> text;
+    private final Localizable text;
+    private final List<FancyMessage> extras;
 
-    public LocalizedFancyMessage(Localizable<String> text) {
+    public LocalizedFancyMessage(Localizable text) {
         this.text = text;
+        this.extras = new ArrayList<>();
     }
 
-    public LocalizedFancyMessage(Localizable<String> text, ChatColor color) {
+    public LocalizedFancyMessage(Localizable text, ChatColor color) {
         this(text);
         color(color);
     }
 
     @Override
-    public TextComponent translate(Locale locale) {
-        return build(this.text.translate(locale));
+    public void addExtra(FancyMessage extra) {
+        this.extras.add(extra);
+    }
+
+    public TextComponent toComponent(Locale locale) {
+        TextComponent text = build(this.text.translate(locale));
+        for (FancyMessage extra : this.extras)
+            text.addExtra(extra.translate(locale));
+        return text;
     }
 
     @Override

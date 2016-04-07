@@ -5,7 +5,7 @@ import net.avicus.dragoman.TranslationBundle;
 
 import java.util.Locale;
 
-public class LocalizedString implements Localizable<String> {
+public class LocalizedString implements Localizable {
     private final TranslationBundle bundle;
     private final String key;
 

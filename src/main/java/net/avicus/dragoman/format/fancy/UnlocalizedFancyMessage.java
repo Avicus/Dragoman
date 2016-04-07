@@ -6,13 +6,17 @@ import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class UnlocalizedFancyMessage extends FancyMessage {
     private final String text;
+    private final List<FancyMessage> extras;
 
     public UnlocalizedFancyMessage(String text) {
         this.text = text;
+        this.extras = new ArrayList<>();
     }
 
     public UnlocalizedFancyMessage(String text, ChatColor color) {
@@ -20,9 +24,16 @@ public class UnlocalizedFancyMessage extends FancyMessage {
         color(color);
     }
 
+    public void addExtra(FancyMessage message) {
+        this.extras.add(message);
+    }
+
     @Override
-    public TextComponent translate(@Nullable Locale locale) {
-        return super.build(this.text);
+    public TextComponent toComponent(@Nullable Locale locale) {
+        TextComponent component = super.build(this.text);
+        for (FancyMessage extra : this.extras)
+            component.addExtra(extra.translate(locale));
+        return component;
     }
 
     @Override

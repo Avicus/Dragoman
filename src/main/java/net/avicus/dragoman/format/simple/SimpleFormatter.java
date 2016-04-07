@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class SimpleFormatter implements Formatter<Localizable<String>, String> {
+public class SimpleFormatter implements Formatter<Localizable> {
     private final TranslationBundle bundle;
     private final String key;
 
@@ -18,12 +18,12 @@ public class SimpleFormatter implements Formatter<Localizable<String>, String> {
     }
 
     @SafeVarargs
-    public final SimpleStyler format(Localizable<String>... arguments) {
+    public final SimpleStyler format(Localizable... arguments) {
         return format(new ArrayList<>(Arrays.asList(arguments)));
     }
 
     @Override
-    public final SimpleStyler format(List<Localizable<String>> arguments) {
+    public final SimpleStyler format(List<Localizable> arguments) {
         return new SimpleStyler(this.bundle, this.key, arguments);
     }
 }

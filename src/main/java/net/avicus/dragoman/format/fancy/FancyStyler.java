@@ -11,17 +11,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class FancyStyler extends FancyMessage implements Styler<FancyMessage, TextComponent>, FancyAttributable {
+public class FancyStyler extends FancyMessage implements Styler<FancyMessage>, FancyAttributable {
     private final TranslationBundle bundle;
     private final String key;
     private final List<FancyMessage> arguments;
     private final FancyAttributes attributes;
+    private final List<FancyMessage> extras;
 
     public FancyStyler(TranslationBundle bundle, String key, List<FancyMessage> arguments) {
         this.bundle = bundle;
         this.key = key;
         this.arguments = arguments;
         this.attributes = new FancyAttributes();
+        this.extras = new ArrayList<>();
     }
 
     @Override
@@ -29,8 +31,7 @@ public class FancyStyler extends FancyMessage implements Styler<FancyMessage, Te
         return this.arguments.get(num);
     }
 
-    @Override
-    public TextComponent translate(Locale locale) {
+    public TextComponent toComponent(Locale locale) {
         String raw = this.bundle.translate(locale, this.key);
 
         List<TextComponent> parts = new ArrayList<>();
@@ -45,9 +46,12 @@ public class FancyStyler extends FancyMessage implements Styler<FancyMessage, Te
                 FancyMessage arg = this.arguments.get(i);
                 arg.inherit(this.attributes);
 
-                parts.add(before.translate(locale));
-                parts.add(arg.translate(locale));
-                raw = split[1];
+                parts.add(before.toComponent(locale));
+                parts.add(arg.toComponent(locale));
+                if (split.length > 1)
+                    raw = split[1];
+                else
+                    raw = "";
             }
             else {
                 break;
@@ -57,7 +61,7 @@ public class FancyStyler extends FancyMessage implements Styler<FancyMessage, Te
         if (raw.length() > 0) {
             FancyMessage remaining = new UnlocalizedFancyMessage(raw);
             remaining.inherit(this.attributes);
-            parts.add(remaining.translate(locale));
+            parts.add(remaining.toComponent(locale));
         }
 
         if (parts.size() == 0)
@@ -67,7 +71,22 @@ public class FancyStyler extends FancyMessage implements Styler<FancyMessage, Te
         for (int i = 1; i < parts.size(); i++)
             result.addExtra(parts.get(i));
 
+        for (FancyMessage extra : this.extras) {
+            extra.inherit(this.attributes);
+            result.addExtra(extra.toComponent(locale));
+        }
+
         return result;
+    }
+
+    @Override
+    public void addExtra(FancyMessage message) {
+        this.extras.add(message);
+    }
+
+    @Override
+    public void inherit(FancyAttributes attributes) {
+        this.attributes.inherit(attributes);
     }
 
     @Override

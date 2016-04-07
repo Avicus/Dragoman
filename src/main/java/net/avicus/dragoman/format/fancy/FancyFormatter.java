@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class FancyFormatter implements Formatter<FancyMessage, TextComponent> {
+public class FancyFormatter implements Formatter<FancyMessage> {
     private final TranslationBundle bundle;
     private final String key;
 

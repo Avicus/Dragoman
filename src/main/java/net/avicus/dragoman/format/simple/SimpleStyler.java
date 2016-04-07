@@ -7,19 +7,19 @@ import net.avicus.dragoman.format.Styler;
 import java.util.List;
 import java.util.Locale;
 
-public class SimpleStyler implements Styler<Localizable<String>, String> {
+public class SimpleStyler implements Styler<Localizable> {
     private final TranslationBundle bundle;
     private final String key;
-    private final List<Localizable<String>> arguments;
+    private final List<Localizable> arguments;
 
-    public SimpleStyler(TranslationBundle bundle, String key, List<Localizable<String>> arguments) {
+    public SimpleStyler(TranslationBundle bundle, String key, List<Localizable> arguments) {
         this.bundle = bundle;
         this.key = key;
         this.arguments = arguments;
     }
 
     @Override
-    public Localizable<String> getArgument(int num) {
+    public Localizable getArgument(int num) {
         return this.arguments.get(num);
     }
 

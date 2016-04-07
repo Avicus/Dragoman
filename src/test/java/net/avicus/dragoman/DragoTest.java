@@ -86,9 +86,9 @@ public class DragoTest {
         FancyFormatter formatter = new FancyFormatter(bundle, "hello");
         FancyStyler styler = formatter.format(new UnlocalizedFancyMessage("Bob").bold(true));
 
-        TextComponent result = styler.translate(new Locale("en"));
+        String result = styler.translate(new Locale("en"));
 
-        System.out.println(result.toLegacyText());
+        System.out.println(result);
     }
 
     @Test
@@ -100,10 +100,10 @@ public class DragoTest {
         FancyStyler test2 = Message.FANCY_HELLO_UNKNOWN.format(Message.FANCY_NAME_ALEX.bold(true).italic(true)).color(ChatColor.GOLD);
 
 
-        System.out.println(test1.translate(en).toLegacyText());
-        System.out.println(test1.translate(es).toLegacyText());
+        System.out.println(test1.translate(en));
+        System.out.println(test1.translate(es));
 
-        System.out.println(test2.translate(en).toLegacyText());
-        System.out.println(test2.translate(es).toLegacyText());
+        System.out.println(test2.translate(en));
+        System.out.println(test2.translate(es));
     }
 }
