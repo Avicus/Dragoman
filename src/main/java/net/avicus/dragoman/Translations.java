@@ -22,8 +22,8 @@ public class Translations {
     }
 
     public static TranslationSet fromXmlElement(Element element) {
-        if (!element.getName().equals("lang"))
-            throw new TranslationException("XML element must be <lang/>.");
+        if (!element.getName().equals("locale"))
+            throw new TranslationException("XML element must be named <locale>.");
 
         String lang = element.getAttributeValue("lang");
         String country = element.getAttributeValue("country");
