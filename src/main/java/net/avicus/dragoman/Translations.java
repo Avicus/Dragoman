@@ -39,7 +39,7 @@ public class Translations {
             if (content instanceof Element) {
                 Element descendant = (Element) content;
                 if (descendant.getChildren().size() == 0) {
-                    String path = getPath(descendant, descendant);
+                    String path = getPath(element, descendant);
                     set.put(path, descendant.getText());
                 }
             }

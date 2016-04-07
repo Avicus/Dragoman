@@ -56,7 +56,7 @@ public class DragoTest {
 
     @Test
     public void fromXml() throws JDOMException, IOException {
-        TranslationSet set = Translations.fromXml(this.getClass().getClassLoader().getResourceAsStream("test.xml"));
+        TranslationSet set = Translations.fromXml(this.getClass().getClassLoader().getResourceAsStream("./test.xml"));
 
         System.out.println(set.get("what.a.mess"));
     }
